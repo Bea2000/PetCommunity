@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="column">
+    <div class="content">
+    <h2>Solicitudes Enviadas</h2>
+    </div>
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth" style="width: 40%">
+            <thead>
+                <tr style= "background-color: #FF7F50">
+                    <th style= "color: white; text-align: center;">Nombre Donante</th>
+                    <th style= "color: white; text-align: center;">Estado</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% @requests.each do |req|%>
+                    <% if current_user.id == req.adoptant.id%>
+
+                        <tr>
+                            <td style="text-align: center;"><%= User.find_by(id: req.donator).user_name.capitalize %></td>
+                            <td style="text-align: center;"><%= req.state.capitalize %></td>
+                        </tr>
+                    <% end %>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    <div class="column">
+    <div class="content">
+    <h2>Solicitudes recibidas</h2>
+    </div>
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth" style="width: 40%">
+            <thead>
+                <tr style= "background-color: #FF7F50">
+                    <th style= "color: white; text-align: center;">Nombre Adoptante</th>
+                    <th style= "color: white; text-align: center;">Estado</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% @requests.each do |req|%>
+                    <% if current_user.id == req.donator.id%>
+                        <tr>
+
+                            <td style="text-align: center;vertical-align: middle;"><%= User.find_by(id: req.adoptant).user_name.capitalize %></td>
+                            <td style="text-align: center;vertical-align: middle;"><%= req.state.capitalize %></td>
+                            <td style="text-align: center;vertical-align: middle;"><button class="button is-success"><%= link_to 'Aceptar', chats_new_path(:don => req.donator.id, :adp => req.adoptant.id) %></button></td>
+                            <td style="text-align: center;vertical-align: middle;"><button class="button is-danger">Cancelar</button></td>
+                        </tr>
+                    <% end %>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Volver', :back %></button>
+
+<!-- 
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Editar', requests_edit_path(@request.id) if @request %></button>
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Eliminar', requests_delete_path(@request.id), method: :delete if @request %></button>
+
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px"><%= link_to 'Crear nueva solicitud', requests_new_path %></button>
+-->

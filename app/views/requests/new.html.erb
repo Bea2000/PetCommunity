@@ -1,0 +1,67 @@
+<br>
+<h1 class='is-size-2' style="margin-left:20px">Nueva solicitud</h1>
+<br>
+<br>
+
+<div style="margin-left:20px">
+<%= form_with(model: @request, method: :post, local: true) do |form| %>
+    <%- if @request.errors.any? %>
+    <%= @request.errors.full_messages%>
+        <div class="notification is-danger" style="width: 30%">
+            Algo ha salido mal!
+        </div>
+    <% end %>
+    <br>
+        <div class="field">
+        <div class="control" style="padding-right: 70%">
+            <%= form.text_field :donator_id, value: params[:don].to_i, class: "input", type: :hidden %>
+        </div>
+    </div>
+    <%- if @request.errors[:donator_id].any?%>
+    <div class= "help is-danger">
+        <%= @request.errors[:donator_id].first %>
+    </div>
+    <% end %>
+    <br>
+    <div class="field">
+        <div class="control" style="padding-right: 70%">
+            <%= form.text_field :adoptant_id, value: current_user.id, class: "input", type: :hidden %>
+        </div>
+    </div>
+    <%- if @request.errors[:adoptant_id].any?%>
+    <div class= "help is-danger">
+        <%= @request.errors[:adoptant_id].first %>
+    </div>
+    <% end %>
+    <br>
+    <div class="field">
+        <div class="control" style="padding-right: 70%">
+            <%= form.text_field :state, value: 'pendiente', class: "input", type: :hidden %>
+        </div>
+    </div>
+    <%- if @request.errors[:state].any?%>
+    <div class= "help is-danger">
+        <%= @request.errors[:state].first %>
+    </div>
+    <% end %>
+    <br>
+    <div class="field">
+        <div class="control" style="padding-right: 70%">
+            <%= form.text_field :publication_id, value: params[:id_pb].to_i, class: "input", type: :hidden %>
+        </div>
+    </div>
+    <%- if @request.errors[:publication_id].any?%>
+    <div class= "help is-danger">
+        <%= @request.errors[:publication_id].first %>
+    </div>
+    <% end %>
+    <br>
+    <div class="control">
+        <div class="action">
+            <%= form.submit "Crear Solicitud", class: "button is-link" %>
+            <% # link_to 'crear chat (test)', chats_new_path(donat: @request.donator, adopt: @request.adoptant) %>
+            <% # no funciono%>
+        </div>
+    </div>
+<% end %>
+</div>

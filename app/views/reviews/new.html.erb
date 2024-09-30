@@ -1,0 +1,70 @@
+
+<br>
+<h1 class='is-size-2' style="margin-left:20px">Deja aqui tu reseña</h1>
+<br>
+<br>
+
+<div style="margin-left:20px">
+<%= form_with(model: @review, method: :post, local: true) do |form| %>
+    <%- if @review.errors.any? %>
+        <div class="notification is-danger" style="width: 30%">
+            Algo ha salido mal!
+        </div>
+    <% end %>
+    <div class="field">
+        <label class="label is-size-4 has-text-weight-light">Tu usuario</label>
+        <div class="control" style="padding-right: 70%">
+            <%= form.text_field :adoptant, class: "input" %>
+        </div>
+    </div>
+    <%- if @review.errors[:adoptant].any?%>
+    <div class= "help is-danger">
+        <%= @review.errors[:adoptant].first %>
+    </div>
+    <% end %>
+    <br>
+    <div class="field">
+        <label class="label is-size-4 has-text-weight-light">Usuario a evaluar</label>
+        <div class="control" style="padding-right: 70%">
+            <%= form.text_field :user_id, class: "input" %>
+        </div>
+    </div>
+    <%- if @review.errors[:user_id].any?%>
+    <div class= "help is-danger">
+        <%= @review.errors[:user_id].first %>
+    </div>
+    <% end %>
+    <br>
+    <div class="field">
+        <label class="label is-size-4 has-text-weight-light">Calificación</label>
+        <div class="control" style="padding-right: 70%">
+            <%= form.text_field :rating, class: "input" %>
+        </div>
+    </div>
+    <%- if @review.errors[:rating].any?%>
+    <div class= "help is-danger">
+        <%= @review.errors[:rating].first %>
+    </div>
+    <% end %>
+    <br>
+    <div class="field">
+        <label class="label is-size-4 has-text-weight-light">Comentario</label>
+        <div class="control" style="padding-right: 70%">
+            <%= form.text_field :content, class: "input" %>
+        </div>
+    </div>
+    <%- if @review.errors[:content].any?%>
+    <div class= "help is-danger">
+        <%= @review.errors[:content].first %>
+    </div>
+    <% end %>
+    <br>
+    <div class="control">
+        <div class="action">
+            <%= form.submit "Crear Reseña", class: "button is-link" %>
+        </div>
+    </div>
+<% end %>
+</div>
+
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Volver a la lista de reseñas', reviews_index_path %></button>

@@ -1,0 +1,99 @@
+<br>
+<h1 class='is-size-2' style="margin-left:20px">Crear Nueva Publicacion</h1>
+<br>
+<br>
+<div style="margin-left:20px">
+<%= form_with(model: @publication, method: :post, local: true) do |form| %>
+    <%- if @publication.errors.any? %>
+        <div class="notification is-danger" style="width: 30%">
+            Algo ha salido mal!
+        </div>
+    <% end %>
+    <div class="control" style="padding-right: 70%">
+    <%= form.text_field :user_id, class: "input", value: current_user.id, type: :hidden %>
+    </div>
+    <div class="field">
+        <label class="label is-size-4 has-text-weight-light">Título</label>
+        <div class="control" style="padding-right: 70%">
+            <%= form.text_field :title, class: "input" %>
+        </div>
+        <%- if @publication.errors[:title].any?%>
+            <div class= "help is-danger">
+                <%= @publication.errors[:title].first %>
+            </div>
+        <% end %>
+    </div>
+    <br>
+        <div class="field">
+        <label class="label is-size-4 has-text-weight-light">Tipo de publicación</label>
+        <div class="control" style="padding-right: 70%">
+            <div class="select">
+                <%= form.select(:kind, options_for_select([["Adopción", "Adopción"],["Venta", "Venta"]])) %>
+            </div>
+        </div>
+        <%- if @publication.errors[:kind].any?%>
+            <div class= "help is-danger">
+                <%= @publication.errors[:kind].first %>
+            </div>
+        <% end %>
+    </div>
+    <br>
+        <div class="field">
+        <label class="label is-size-4 has-text-weight-light">Precio</label>
+        <div class="control" style="padding-right: 70%">
+            <%= form.text_field :price, class: "input" %>
+        </div>
+        <%- if @publication.errors[:price].any?%>
+            <div class= "help is-danger">
+                <%= @publication.errors[:price].first %>
+            </div>
+        <% end %>
+    </div>
+    <br>
+        <div class="field">
+        <label class="label is-size-4 has-text-weight-light">Dirección</label>
+        <div class="control" style="padding-right: 70%">
+            <%= form.text_field :direction, class: "input" %>
+        </div>
+        <%- if @publication.errors[:direction].any?%>
+            <div class= "help is-danger">
+            <%= @publication.errors[:direction].first %>
+            </div>
+        <% end %>
+    </div>
+    <br>
+        <div class="field">
+        <label class="label is-size-4 has-text-weight-light">Especie</label>
+        <div class="control" style="padding-right: 70%">
+            <%= form.text_field :species, class: "input" %>
+        </div>
+        <%- if @publication.errors[:species].any?%>
+            <div class= "help is-danger">
+            <%= @publication.errors[:species].first %>
+            </div>
+        <% end %>
+    </div>
+    <br>
+        <div class="field">
+        <label class="label is-size-4 has-text-weight-light">Foto</label>
+        <div class="control" style="padding-right: 70%">
+            <%= form.file_field :image, class: "input" %>
+        </div>
+        <%- if @publication.errors[:image].any?%>
+            <div class= "help is-danger">
+            <%= @publication.errors[:image].first %>
+            </div>
+        <% end %>
+    </div>   
+    <br>
+ 
+
+    <div class="control">
+        <div class="action">
+            <%= form.submit "Crear Publicación", class: "button is-link" %>
+        </div>
+    </div>
+<% end %>
+</div>
+
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Volver a la lista de publicaciones', publications_index_path %></button>

@@ -1,0 +1,32 @@
+<div class="container" id='publications-container'>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Titulo</th>
+                <th>Tipo</th>
+                <th>Especie</th>
+                <th>Imagen</th>
+                <th colspan='3'>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% @publications.each do |pub| %>
+                <tr>
+                    <td><%= User.find_by(id: pub.user_id).name %></td>
+                    <td><%= pub.title %></td>
+                    <td><%= pub.kind %></td>
+                    <td><%= pub.species %></td>
+                    <td><%= image_tag(pub.image) %></td>
+                    <td><%= link_to 'Ver detalle', publications_show_path(pub.id) %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px"><%= link_to 'Crear nueva publicación', publications_new_path %></button>
+<br>
+<br>
+<br>

@@ -1,0 +1,29 @@
+<br>
+<h1 style="margin-left: 20px" class='is-size-2'>Comentarios</h1>
+
+<p><%= notice %></p>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+            <th>Emisor</th>
+            <th>Receptor</th>
+            <th>Mensaje</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% @messages.each do |message| %>
+                <tr>
+                    <td><%= message.sender %></td>
+                    <td><%= message.reciever %></td>
+                    <td><%= message.content %></td>
+                    <td><%= link_to 'Ver detalle', messages_show_path(message.id)%></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px"><%= link_to 'Enviar otro mensaje', messages_new_path %></button>

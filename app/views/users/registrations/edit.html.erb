@@ -1,0 +1,74 @@
+<h2 class='is-size-2' style="margin-left:20px">Editar Mi Usuario</h2>
+
+<div style="margin-left:20px">
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "users/shared/error_messages", resource: resource %>
+  <br>
+      <div class="field">
+        <label class="label is-size-4 has-text-weight-light">Nombre</label>
+        <div class="control" style="padding-right: 70%">
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "input" %>
+        </div>
+    </div>
+  <br>
+      <div class="field">
+        <label class="label is-size-4 has-text-weight-light">Número</label>
+        <div class="control" style="padding-right: 70%">
+            <%= f.text_field :number, autocomplete: "number", class: "input" %>
+        </div>
+    </div>
+  <br>
+      <div class="field">
+        <label class="label is-size-4 has-text-weight-light">Usuario</label>
+        <div class="control" style="padding-right: 70%">
+            <%= f.text_field :user_name, autocomplete: "user_name", class: "input" %>
+        </div>
+    </div>
+  <br>
+      <div class="field">
+        <label class="label is-size-4 has-text-weight-light">Email</label>
+        <div class="control" style="padding-right: 70%">
+            <%= f.email_field :email, autocomplete: "email", class: "input" %>
+        </div>
+    </div>
+  <br>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+      <div class="field">
+        <label class="label is-size-4 has-text-weight-light">Nueva contraseña <i>(Dejar en blanco si no quieres cambiarla)</i></label>
+        <div class="control" style="padding-right: 70%">
+            <%= f.password_field :password, autocomplete: "new-password", class: "input" %>
+          <% if @minimum_password_length %>
+            <br />
+            <em><%= @minimum_password_length %> caracteres mínimo</em>
+          <% end %>
+        </div>
+    </div>
+  <br>
+      <div class="field">
+        <label class="label is-size-4 has-text-weight-light">Confirma nueva contreña</label>
+        <div class="control" style="padding-right: 70%">
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input" %>
+        </div>
+    </div>
+  <br>
+      <div class="field">
+        <label class="label is-size-4 has-text-weight-light">Contraseña actual</label>
+        <div class="control" style="padding-right: 70%">
+            <%= f.password_field :current_password, autocomplete: "current-password", class: "input" %>
+        </div>
+    </div>
+  <br>
+  <div class="control">
+      <div class="action">
+          <%= f.submit "Guardar Cambios", class: "button is-link" %>
+      </div>
+  </div>
+<% end %>
+</div>
+<br>
+
+<button class="button is-rounded" style=" margin-left: 20px; margin-bottom: 30px"><%= link_to 'Volver',:back %></button>

@@ -1,0 +1,26 @@
+<p style="margin-top: 20px; margin-left: 20px;"><%= notice %></p>
+
+<table class="table is-striped">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>A quien calificó</th>
+            <th>Calificación</th>
+            <th>Comentario</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td><%= @review.adoptant if @review %></td>
+            <td><%= @review.user_id if @review%></td>
+            <td><%= @review.rating if @review %></td>
+            <td><%= @review.content if @review %></td>
+        </tr>
+    </tbody>
+</table>
+
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Volver', reviews_index_path %></button>
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Editar', reviews_edit_path(@review.id) if @review %></button>
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Eliminar', reviews_delete_path(@review.id), method: :delete if @review %></button>
+

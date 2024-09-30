@@ -1,0 +1,40 @@
+<br>
+<h1 class='is-size-2' style="margin-left: 20px">Nuevo Mensaje</h1>
+<br>
+<br>
+<div style="margin-left:20px">
+<%= form_with(model: @message, method: :post, local: true) do |form| %>
+<%= @message.errors.full_messages%>
+    <div class="field">
+        <div class="control" style="padding-right: 70%">
+            <%= form.text_field :sender_id, class: "input", value: params[:send].to_i , type: :hidden %>
+        </div>
+    </div>
+    <br>
+        <div class="field">
+        <div class="control" style="padding-right: 70%">
+            <%= form.text_field :reciever_id, class: "input" , value: params[:rec].to_i, type: :hidden %>
+        </div>
+    </div>
+    <br>
+    <div class="field">
+        <div class="control" style="padding-right: 70%">
+            <%= form.text_field :chat_id, class: "input" , value: params[:ch_id].to_i, type: :hidden %>
+        </div>
+    </div>
+    <br>
+    <div class="field">
+        <label class="label is-size-4 has-text-weight-light">Mensaje</label>
+        <div class="control" style="padding-right: 70%">
+            <%= form.text_field :content, class: "input" %>
+        </div>
+    </div>
+    <br>
+    <div class="control">
+        <div class="action">
+            <%= form.submit "Enviar mensaje", class: "button is-link" %>
+        </div>
+    </div>
+<% end %>
+</div>
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px"><%= link_to 'Volver', chats_show_path(params[:ch_id].to_i) %></button>

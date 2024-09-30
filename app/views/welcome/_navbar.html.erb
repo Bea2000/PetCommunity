@@ -1,0 +1,60 @@
+<nav class="navbar" role="navigation" aria-label="main navigation" style="height:5em !important; background-color:#FF7F50;">
+  <div class="navbar-brand">
+    <a class="navbar-item-is-spaced" href=<%= root_path %> style="height:5em !important; padding-top: 2px">
+      <img src= "https://pbs.twimg.com/profile_images/1331599476/mayor-excited.png" width="70" height="120">
+    </a>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="nav-menu">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div class="navbar-menu" id="nav-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href=<%= publications_index_path%>>
+        Publicaciones
+      </a>
+
+      <a class="navbar-item" href=<%= reviews_index_path %>>
+        Reseñas
+      </a>
+
+      <a class="navbar-item" href=<%= chats_index_path %>>
+        Chats
+      </a>
+
+      <a class="navbar-item" href=<%= requests_index_path %>>
+        Solicitudes
+      </a>
+
+      <% if !current_user %>   
+          <a class="navbar-item" href=<%= new_user_session_path %>>
+            Iniciar Sesión
+          </a>
+
+          <a class="navbar-item" href=<%= new_user_registration_path %>>
+            Registrarse
+          </a>
+      <% end %>
+
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <% if current_user %>
+              <a class="navbar-item" href=<%= user_path(current_user) %>>
+                Ver Perfil
+              </a>
+              <a class="navbar-item" href=<%= edit_user_registration_path %>>
+                Editar Perfil
+              </a>
+              <%= link_to "Cerrar Sesión", destroy_user_session_path, method: :delete %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

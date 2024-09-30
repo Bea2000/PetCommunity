@@ -1,0 +1,38 @@
+<br>
+<h1 style="margin-left: 20px" class='is-size-2'>Reseñas</h1>
+
+<% if notice %>
+    <div class="notification is-success" style= "width:30%; margin-left: 1%;text-align: center;">
+        <%= notice %>
+    </div>
+<% end %>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Adoptante</th>
+                <th>Donante</th>
+                <th>Calificación</th>
+                <th>Comentario</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% @reviews.each do |review| %>
+                <tr>
+                    <td><%= review.adoptant %></td>
+                    <td><%= review.user_id %></td>
+                    <td><%= review.rating %></td>
+                    <td><%= review.content %></td>
+                    <td><%= link_to 'Ver detalle', reviews_show_path(review.id) %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+
+
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px"><%= link_to 'Crear nueva reseña', reviews_new_path %></button>
+<thead>
+ 

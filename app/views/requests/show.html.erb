@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="column">
+    <h2>Solicitudes Enviadas</h2>
+        <table class="table is-striped">
+            <thead>
+                <tr>
+                    <th>Nombre Donante</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td><%= User.find_by(id:@request.donator).user_name if current_user.id == User.find_by(id: @request.adoptant).id %></td>
+                    <td><%= @request.state if @request %></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="column">
+    <h2>Solicitudes recibidas</h2>
+        <table class="table is-striped">
+            <thead>
+                <tr>
+                    <th>Nombre Adoptante</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td><%= User.find_by(id:@request.adoptant).user_name if current_user.id == User.find_by(id: @request.donator).id %></td>
+                    <td><%= @request.state if @request %></td><button>Aceptar</button><button>Cancelar</button>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Volver', requests_index_path %></button>
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Editar', requests_edit_path(@request.id) if @request %></button>
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Eliminar', requests_delete_path(@request.id), method: :delete if @request %></button>

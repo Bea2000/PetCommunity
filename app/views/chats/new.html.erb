@@ -1,0 +1,38 @@
+<br>
+<h1 class='is-size-2' style="margin-left:20px">Crea un nuevo chat</h1>
+<br>
+<br>
+<div style="margin-left:20px">
+<%= form_with(model: @chat, method: :post, local: true) do |form| %>
+    <%- if @chat.errors.any? %>
+    <%= @chat.errors.full_messages%>
+        <div class="notification is-danger" style="width: 30%">
+            Algo ha salido mal!
+        </div>
+    <% end %>
+    <div class="field">
+        <div class="control" style="padding-right: 70%">
+            <%= form.text_field :donator_id, value: params[:don].to_i, class: "input", type: :hidden %>
+        </div>
+    </div>
+    <%- if @chat.errors[:donator_id].any?%>
+    <div class= "help is-danger">
+        <%= @chat.errors[:donator_id].first %>
+    </div>
+    <% end %>
+    <div class="field">
+        <div class="control" style="padding-right: 70%">
+            <%= form.text_field :adoptant_id, value: params[:adp].to_i, class: "input", type: :hidden %>
+        </div>
+    </div>
+    <br>
+
+    <div class="control">
+        <div class="action">
+            <%= form.submit "Crear Chat", class: "button is-link" %>
+        </div>
+    </div>
+<% end %>
+</div>
+
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px"><%= link_to 'Volver a la lista de chats', chats_index_path %></button>

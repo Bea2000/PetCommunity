@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <br>
+<% if notice %>
+    <div class="notification is-success" style= "width:30%; margin-left: 1%">
+        <%= notice %>
+    </div>
+<% end %>
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bulma Tropico 🍍</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-social@2/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/css/bulma-carousel.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
+  </head>
+
+  <body>
+
+    <section class="section" id="carousel-section" style="background-color: rgba(219,235,192,.3)">
+      <div class="container">
+        <div id="carousel-demo" class="carousel pb-6" style="overflow: hidden">
+          <div class="item-1">
+            <div class="columns">
+              <div class="column is-half">
+                <h2 class="title is-1">Bienvenide a PetDCComunnity</h2>
+                <p>
+                  El lugar para conocer a tu nuev@ mejor amig@
+                </p>
+                <br />
+
+                <div class="buttons is-left">
+                  <a href=<%= publications_index_path%>>
+                  <button class="button is-medium is-orange button is-link is-light">
+                    VER MASCOTAS
+                  </button>
+                  </a>
+                </div>
+              </div>
+              <div class="column is-half">
+                <figure class="image is is-covered">
+                  <%= image_tag( "logo.png", size: "50x50", :alt => "rss feed") -%>
+                </figure>
+              </div>
+            </div>
+          </div>
+          <div class="item-2">
+            <div class="columns">
+              <div class="column is-half">
+                <h2 class="title is-1">Publica a tus animalitos</h2>
+                <p>
+                  Consigue el hogar perfecto para tus animales
+                </p>
+                <br />
+
+                <div class="buttons is-left">
+                  <a href=<%= new_user_registration_path %>>
+                  <button class="button is-medium is-orange button is-link is-light">
+                    COMIENZA AQUÍ
+                  </button>
+                  </a>
+                </div>
+              </div>
+              <div class="column is-half">
+                <figure class="image is is-covered">
+                  <%= image_tag( "pets.jpg", size: "50x50", :alt => "rss feed") -%>
+                </figure>
+              </div>
+            </div>
+            <!-- Slide Content -->
+          </div>
+        </div>
+        <!-- End Carousel -->
+      </div>
+    </section>
+  </body>
+</html>
+
+<script>
+  bulmaCarousel.attach('#carousel-demo', {
+    initialSlide: 0,
+    slidesToScroll: 1,
+    slidesToShow: 1,
+  });
+</script>

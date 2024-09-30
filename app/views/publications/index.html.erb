@@ -1,0 +1,69 @@
+<br>
+<h1 style="margin-left: 20px" class='is-size-2'>Publicaciones</h1>
+
+<% if notice %>
+    <div class="notification is-success" style= "width:30%; text-align: center;">
+        <%= notice %>
+    </div>
+<% end %>
+
+<div style="margin-bottom: 30px">
+<%= form_tag(publications_search_path, method: :get) do %>
+  <%= text_field_tag :search, '', class: 'input is-primary is-two-fifths', placeholder: "Busqueda por título", style: 'margin-left: 20px; width: 30%'%>
+  <div class="select">
+  <%= select_tag :filter, options_for_select(['Selecciona una opción', 'Venta','Adopción']), class: "custom-select" %>
+  </div>
+  <%= submit_tag 'Buscar', class: "button is-light" %>
+<% end %>
+</div>
+
+<% @publications.each do |pub| %>
+    <div style="margin-left: 1%; margin-right: 1%;border-color: black;border-style: solid;border-radius: 7px;; margin-bottom: 1%; width: 50%">
+        <div class="card">
+            <header class="card-header" style="display:block;padding-top: 1%; background-color: lightblue">
+                <p class="title" style="margin-left: 1%">
+                    <strong> <%= User.find_by(id: pub.user_id).name %> </strong>
+                </p>
+                <p class="subtitle" style="margin-left: 1%; padding-bottom: 1%">
+                    <i> "<%= pub.title  %>" </i>
+                </p>
+            </header>
+        </div>
+
+        <div class="columns">
+            <div class="column is-two-third">
+                <div class="card-content" style="">
+                    <div class="content">
+                        <div class="table-container" style="padding-right:20%;margin:center;">
+                            <table class="table is-hoverable">
+                                <tr>
+                                    <th> Venta/Adopcion: </th>
+                                    <td> <%= pub.kind %> </td>
+                                </tr>
+                                <tr>
+                                    <th> Especie: </th>
+                                    <td> <%= pub.species %> </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="card-content">
+                    <figure class="image">
+                        <%= image_tag(pub.image) %>
+                    </figure>
+                </div>
+            </div>
+        </div>
+        <br>
+        <footer class="card-footer" style="padding-top:1%; margin-bottom: 1%">
+            <a style="margin-left:1%"> <%= link_to 'Ver detalle', publications_show_path(pub.id) %> </a>
+        </footer>
+    </div>
+<% end %>
+
+<% if current_user %>
+    <button class="button is-rounded" style="margin-top: 20px; margin-left: 20px"><%= link_to 'Crear nueva publicación', publications_new_path %></button>
+<% end %>

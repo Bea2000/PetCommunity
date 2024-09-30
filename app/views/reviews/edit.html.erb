@@ -1,0 +1,38 @@
+<br>
+<h1 style="margin-left: 20px">Edita tu reseña</h1>
+
+<%= form_with(model: @review, method: :patch, url: reviews_update_path, local: true) do |form| %>
+    <%- if @review.errors.any? %>
+        <div class="notification is-danger" style="width: 30%">
+            Algo ha salido mal!
+        </div>
+    <% end %>
+
+    <div class='field'>
+        <%= form.label :Calificación %>
+        <%= form.text_field :rating %>
+    </div>
+    <%- if @review.errors[:rating].any?%>
+    <div class= "help is-danger">
+        <%= @review.errors[:rating].first %>
+    </div>
+    <% end %>
+
+    <div class='field'>
+        <%= form.label :Comentario %>
+        <%= form.text_field :content %>
+    </div>
+    <%- if @review.errors[:content].any?%>
+    <div class= "help is-danger">
+        <%= @review.errors[:content].first %>
+    </div>
+    <% end %>
+
+    <div class='action'>
+        <%= form.submit 'Guardar' %>
+    </div>
+
+<% end %>
+
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Volver', reviews_show_path(@review.id) if @review %></button>
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Otras reseñas', reviews_index_path %></button>

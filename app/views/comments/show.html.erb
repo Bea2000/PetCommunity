@@ -1,0 +1,23 @@
+<p style="margin-top: 20px; margin-left: 20px;"><%= notice %></p>
+
+<table class="table is-striped">
+    <thead>
+        <tr>
+            <th>Publicación</th>
+            <th>Usuario</th>
+            <th>Comentario</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td><%= @comment.publication_id if @comment %></td>
+            <td><%= @comment.user_id if @comment %></td>
+            <td><%= @comment.description  if @comment%></td>
+        </tr>
+    </tbody>
+</table>
+
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Volver', comments_index_path %></button>
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Editar', comments_edit_path(@comment.id) if @comment %></button>
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Eliminar', comments_delete_path(@comment.id), method: :delete if @comment %></button>

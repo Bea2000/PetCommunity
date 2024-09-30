@@ -1,0 +1,59 @@
+<% if notice %>
+    <div class="notification is-success" style= "width:30%; text-align: center;margin-left: 20px; margin-top: 1%">
+        <%= notice %>
+    </div>
+<% end %>
+
+<div style="margin-left: 1%; margin-right: 1%;border-color: black;border-style: solid;border-radius: 7px;; margin-bottom: 1%; width: 50%; margin-top: 1%">
+    <div class="card">
+        <header class="card-header" style="display:block;padding-top: 1%; background-color: lightblue">
+            <p class="title" style="margin-left: 1%">
+                <strong> <%= User.find_by(id: @chat.adoptant).name if current_user.id == User.find_by(id: @chat.donator).id %> </strong>
+                <strong> <%= User.find_by(id: @chat.donator).name if current_user.id == User.find_by(id: @chat.adoptant).id %> </strong>
+            </p>
+        </header>
+    </div>
+</div>
+
+<% Message.all.each do |message|%>
+    <% if message.chat_id == @chat.id%>
+        <% if (message.reciever.id == current_user.id) | (message.sender.id == current_user.id) %>
+            <article class="media" style="margin-left: 2%">
+            <figure class="media-left">
+                <p class="image is-64x64">
+                <img src="https://bulma.io/images/placeholders/128x128.png">
+                </p>
+            </figure>
+            <div class="media-content">
+                <div class="content">
+                <p>
+                    <strong><%= User.find_by(id: message.sender).name %></strong>
+                    <br>
+                    <%= message.content %>
+                </p>
+                </div>
+                <nav class="level is-mobile">
+                <div class="level-left">
+                    <% if current_user %>
+                        <% if (current_user.id == message.sender.id) | (current_user.admin_role) %>
+                            <a class="level-item">
+                                <td><%= link_to 'Editar', messages_edit_path(message.id) %></td>
+                            </a>
+                            <a class="level-item">
+                                <td style="margin-left: 10px"><%= link_to 'Eliminar', messages_delete_path(message.id), method: :delete if message %></td>
+                            </a>                   
+                        <% end %>
+                    <% end %>
+                </div>
+                </nav>
+            </div>
+            </article>
+        <% end %>
+    <% end %>
+<% end %>
+<% other = User.find_by(id: @chat.adoptant).id if current_user.id == User.find_by(id: @chat.donator).id %>
+<% other = User.find_by(id: @chat.donator).id if current_user.id == User.find_by(id: @chat.adoptant).id %>
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Enviar mensaje', messages_new_path(:send => current_user.id, :rec => other, :ch_id => @chat.id) %></button>
+<!-- este ultimo boton de enviar mensaje no puede ser probado todavia pero creo que funciona -->
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Volver', chats_index_path %></button>
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Eliminar', chats_delete_path(@chat.id), method: :delete if @chat %></button>

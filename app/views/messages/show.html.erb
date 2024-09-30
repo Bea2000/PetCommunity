@@ -1,0 +1,23 @@
+<p style="margin-top: 20px; margin-left: 20px;"><%= notice %></p>
+
+<table class="table is-striped">
+    <thead>
+        <tr>
+            <th>Emisor</th>
+            <th>Receptor</th>
+            <th>Mensaje</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td><%= @message.sender if @message %></td>
+            <td><%= @message.reciever if @message %></td>
+            <td><%= @message.content  if @message %></td>
+        </tr>
+    </tbody>
+</table>
+
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Volver', messages_index_path %></button>
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Editar', messages_edit_path(@message.id) if @message %></button>
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Eliminar', messages_delete_path(@message.id), method: :delete if @message %></button>

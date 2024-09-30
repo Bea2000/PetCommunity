@@ -1,0 +1,97 @@
+<br>
+<h2 class='is-size-2' style="margin-left:20px">Registrarse</h2>
+<br>
+<br>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%- if resource.errors.any? %>
+        <div class="notification is-danger" style="width: 30%; margin-left: 1%">
+            Algo ha salido mal!
+        </div>
+    <% end %>
+
+  <div style="margin-left:20px">
+    <div class="field">
+        <label class="label is-size-4 has-text-weight-light">Nombre</label>
+        <div class="control" style="padding-right: 70%">
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "input"%>
+        </div>
+    </div>
+    <%- if resource.errors[:name].any?%>
+        <div class= "help is-danger">
+            <%= resource.errors[:name].first %>
+        </div>
+    <% end %>
+    <br>
+      <div class="field">
+          <label class="label is-size-4 has-text-weight-light">Número</label>
+          <div class="control" style="padding-right: 70%">
+              <%= f.text_field :number, autocomplete: "number", class: "input" %>
+          </div>
+      </div>
+    <%- if resource.errors[:number].any?%>
+        <div class= "help is-danger">
+            <%= resource.errors[:number].first %>
+        </div>
+    <% end %>
+    <br>
+      <div class="field">
+          <label class="label is-size-4 has-text-weight-light">Nombre de usuario</label>
+          <div class="control" style="padding-right: 70%">
+              <%= f.text_field :user_name, autocomplete: "user_name", class: "input" %>
+          </div>
+      </div>
+    <%- if resource.errors[:user_name].any?%>
+        <div class= "help is-danger">
+            <%= resource.errors[:user_name].first %>
+        </div>
+    <% end %>
+    <br>
+      <div class="field">
+          <label class="label is-size-4 has-text-weight-light">Email</label>
+          <div class="control" style="padding-right: 70%">
+              <%= f.email_field :email, autocomplete: "email", class: "input" %>
+          </div>
+      </div>
+    <%- if resource.errors[:email].any?%>
+        <div class= "help is-danger">
+            <%= resource.errors[:email].first %>
+        </div>
+    <% end %>
+    <br>
+      <div class="field">
+          <label class="label is-size-4 has-text-weight-light">Contraseña</label>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> mínimo de caracteres)</em>
+          <% end %><br />
+          <div class="control" style="padding-right: 70%">
+              <%= f.password_field :password, autocomplete: "new-password", class: "input" %>
+          </div>
+      </div>
+    <%- if resource.errors[:password].any?%>
+        <div class= "help is-danger">
+            <%= resource.errors[:password].first %>
+        </div>
+    <% end %>
+    <br>
+      <div class="field">
+          <label class="label is-size-4 has-text-weight-light">Confirma tu contraseña</label>
+          <div class="control" style="padding-right: 70%">
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input" %>
+          </div>
+      </div>
+    <%- if resource.errors[:password_confirmation].any?%>
+        <div class= "help is-danger">
+            <%= resource.errors[:password_confirmation].first %>
+        </div>
+    <% end %>
+    <br>
+
+    <div class="actions">
+      <%= f.submit "Registrarme" , class: "button is-link" %>
+    </div>
+    <br>
+  <% end %>
+  </div>
+
+<%# <%= render "users/shared/links" %> 

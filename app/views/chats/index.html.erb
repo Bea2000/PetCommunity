@@ -1,0 +1,36 @@
+<br>
+<h1 style="margin-left: 20px" class='is-size-2'>Mis Chats</h1>
+<p style="margin-top: 20px; margin-bottom:20px; margin-left: 20px">Porque quien no querría que todos los chats de todas las personas fueran publicos</p>
+
+<% if notice %>
+    <div class="notification is-success" style= "width:30%; margin-left: 1%">
+        <%= notice %>
+    </div>
+<% end %>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Contactos</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <% @chats.each do |chat|%>
+                <% if (current_user.id == chat.donator.id) | (current_user.id == chat.adoptant.id)%>
+                    <tr>
+                        <td><%= User.find_by(id: chat.adoptant).user_name if current_user.id == chat.donator.id %></td>
+                        <td><%= User.find_by(id: chat.donator).user_name if current_user.id == chat.adoptant.id %></td>
+                        <td><%= link_to 'Ver detalle', chats_show_path(chat.id) %></td>
+                    </tr>
+                <% end %>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+
+<!-- probablemente haya que sacar este boton despues-->
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px"><%= link_to 'Crear nuevo chat', chats_new_path %></button>
+<thead>

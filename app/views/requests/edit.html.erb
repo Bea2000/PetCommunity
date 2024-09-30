@@ -1,0 +1,72 @@
+<br>
+<h1 class='is-size-2' style="margin-left:20px">Editar solicitud</h1>
+<br>
+<br>
+
+<div style="margin-left:20px">
+<%= form_with(model: @request, method: :patch, url: requests_update_path, local: true) do |form| %>
+    <%- if @request.errors.any? %>
+        <div class="notification is-danger" style="width: 30%">
+            Algo ha salido mal!
+        </div>
+    <% end %>
+    <div class="field">
+        <label class="label is-size-4 has-text-weight-light">Compra/Adopción</label>
+        <div class="control" style="padding-right: 70%">
+            <div class="select">
+                <%= form.select(:kind, options_for_select([["Adopción", "Adopción"],["Venta", "Venta"]])) %>
+            </div>
+        </div>
+    </div>
+    <%- if @request.errors[:kind].any?%>
+    <div class= "help is-danger">
+        <%= @request.errors[:kind].first %>
+    </div>
+    <% end %>
+    <br>
+    <div class="field">
+        <label class="label is-size-4 has-text-weight-light">Donante</label>
+        <div class="control" style="padding-right: 70%">
+            <%= form.text_field :donator, class: "input" %>
+        </div>
+    </div>
+    <%- if @request.errors[:donator].any?%>
+    <div class= "help is-danger">
+        <%= @request.errors[:donator].first %>
+    </div>
+    <% end %>
+    <br>
+    <div class="field">
+        <label class="label is-size-4 has-text-weight-light">Adoptante</label>
+        <div class="control" style="padding-right: 70%">
+            <%= form.text_field :user_id, class: "input" %>
+        </div>
+    </div>
+    <%- if @request.errors[:user_id].any?%>
+    <div class= "help is-danger">
+        <%= @request.errors[:user_id].first %>
+    </div>
+    <% end %>
+    <br>
+    <div class="field">
+        <label class="label is-size-4 has-text-weight-light">Estado</label>
+        <div class="control" style="padding-right: 70%">
+            <%= form.text_field :state, class: "input" %>
+        </div>
+    </div>
+    <%- if @request.errors[:state].any?%>
+    <div class= "help is-danger">
+        <%= @request.errors[:state].first %>
+    </div>
+    <% end %>
+    <br>
+    <div class="control">
+        <div class="action">
+            <%= form.submit "Guardar", class: "button is-link" %>
+        </div>
+    </div>
+<% end %>
+</div>
+
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Volver',requests_show_path(@request.id) if @request %></button>
+<button class="button is-rounded" style="margin-top: 20px; margin-left: 20px; margin-bottom: 30px"><%= link_to 'Listado de solicitudes', requests_index_path %></button>
